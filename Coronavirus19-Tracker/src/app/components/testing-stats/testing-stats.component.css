@@ -1,7 +1,7 @@
-th {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  background-color: black;
+table th, table td {
+  vertical-align: middle;
+}
+a.text-warning:hover {
+  color: #ffc107;
+  text-decoration: none;
 }

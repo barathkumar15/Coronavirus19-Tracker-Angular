@@ -1,29 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'coronavirus19-Tracker';
-  storedTheme:string= localStorage.getItem('theme-color');
-  constructor(){
+  storedTheme: string = 'theme-light'; // default fallback
 
+  ngOnInit(): void {
+    const savedTheme = localStorage.getItem('theme-color');
+    this.storedTheme = savedTheme === 'theme-dark' ? 'theme-dark' : 'theme-light';
+    document.body.className = this.storedTheme;
   }
-  ngOnInit() {}
-
-  setTheme(){
-    if(this.storedTheme === 'theme-dark'){
-  localStorage.setItem('theme-color','theme-light');
-  this.storedTheme =localStorage.getItem('theme-color');
-    }
-    else{
-      localStorage.setItem('theme-color','theme-dark');
-      this.storedTheme =localStorage.getItem('theme-color');
-    }
+  
+  setTheme(): void {
+    this.storedTheme = this.storedTheme === 'theme-dark' ? 'theme-light' : 'theme-dark';
+    localStorage.setItem('theme-color', this.storedTheme);
+    document.body.className = this.storedTheme;
   }
-
-  }
-
-
+  
+}

@@ -7,18 +7,18 @@ import { DataServiceService } from 'src/app/services/data-service.service';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
-contact:any;
-Searchbox;
-  constructor(private service:DataServiceService) { }
+  contact: any[] = [];
+  Searchbox: string = '';
 
-  searchclear(){
-    this.Searchbox='';
+  constructor(private service: DataServiceService) {}
 
-  }
   ngOnInit(): void {
-    this.service.getContactIndia().subscribe(data=>{
-      this.contact = data.data.contacts.regional;
-    })
+    this.service.getContactIndia().subscribe((data) => {
+      this.contact = data?.data?.contacts?.regional || [];
+    });
   }
 
+  searchclear(): void {
+    this.Searchbox = '';
+  }
 }

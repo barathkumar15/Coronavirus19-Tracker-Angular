@@ -1,33 +1,54 @@
-<div class="bg-black text-center" >
-  <h1 class="display-4"><i class="heartbeat icon"></i>CoronaVirus-19 <i class="chart bar icon"></i>Tracker <i class="fa fa-location-arrow" aria-hidden="true"></i> India</h1>
-  <h3 class="display-4"><i class="address card icon"></i>Contact and HelpLine</h3>
+<div class="bg-black text-white text-center py-4">
+  <h1 class="display-4">
+    <i class="heartbeat icon"></i>CoronaVirus-19 
+    <i class="chart bar icon"></i>Tracker 
+    <i class="fa fa-location-arrow" aria-hidden="true"></i> India
+  </h1>
+  <h3 class="display-4">
+    <i class="address card icon"></i>Contact and HelpLine
+  </h3>
 
-  <div class="col-md-4">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <div class="input-group-text"><i class="fa fa-search fa-lg"></i></div>
-  <input class=form-control  Type="text"  name="search"[(ngModel)]="Searchbox" autocomplete="off"placeholder="State/Number">
-  <a class="btn btn-outline-secondary" (click)="searchclear()" *ngIf=Searchbox ><i class="fa fa-close"></i></a>
-  <br>
-  <hr>
-      </div></div>
-</div>
-<hr>
-<div class="table-responsive" id="tabheight">
-  <table class="table table-bordered table-striped table-dark">
-    <thead>
-      <tr>
-        <th scope="col"><i class="fa fa-location-arrow" aria-hidden="true"></i> State</th>
-        <th scope="col"><i class="phone square icon"></i>Phone/Landline Number</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor= "let cs of contact |filter: Searchbox ; let i=index;">
-        <td><i class="fa fa-map-marker" aria-hidden="true"></i>  {{cs.loc}}</td>
-        <td><i class="phone icon"></i>{{cs.number}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-</div>
+  <!-- Search Bar -->
+  <div class="col-md-4 mx-auto my-3">
+    <div class="input-group">
+      <span class="input-group-text bg-secondary text-white">
+        <i class="fa fa-search fa-lg"></i>
+      </span>
+      <input
+        class="form-control"
+        type="text"
+        name="search"
+        [(ngModel)]="Searchbox"
+        autocomplete="off"
+        placeholder="Search by State or Number"
+      />
+      <button
+        class="btn btn-outline-light"
+        (click)="searchclear()"
+        *ngIf="Searchbox"
+      >
+        <i class="fa fa-close"></i>
+      </button>
+    </div>
+  </div>
 
+  <hr class="border-light" />
+
+  <!-- Scrollable Table -->
+  <div class="table-responsive mx-3" style="max-height: 500px; overflow-y: auto;">
+    <table class="table table-bordered table-striped table-dark align-middle">
+      <thead class="table-light text-dark">
+        <tr>
+          <th scope="col"><i class="fa fa-location-arrow"></i> State</th>
+          <th scope="col"><i class="phone square icon"></i> Phone / Landline Number</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cs of contact | filter: Searchbox; let i = index">
+          <td><i class="fa fa-map-marker-alt me-1"></i> {{ cs.loc }}</td>
+          <td><i class="fa fa-phone me-1"></i> {{ cs.number }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

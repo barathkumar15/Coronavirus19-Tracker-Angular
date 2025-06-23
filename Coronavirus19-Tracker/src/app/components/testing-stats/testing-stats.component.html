@@ -1,26 +1,36 @@
-<div class="table-responsive" id="tabheight">
-  <table class="table table-bordered table-striped table-dark">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">TimeStamp</th>
-        <th scope="col">TotalSamplesTested</th>
-        <th scope="col">TotalIndividualsTested</th>
-        <th scope="col">TotalPositiveCases</th>
-        <th scope="col">Source</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor= "let cs of testdata let i=index;">
-        <td>{{i+1}}</td>
-        <td>{{cs.timestamp|date}}</td>
-           <td>{{cs.totalSamplesTested}}</td>
-        <td>{{cs.totalIndividualsTested}}</td>
-        <td>{{cs.totalPositiveCases}}</td>
-        <td><a href="{{cs.source}}">{{cs.source}}</a></td>
-     
-      </tr>
-    </tbody>
-  </table>
-</div>
+<div class="container-fluid bg-dark text-white py-4 text-center">
+  <h1 class="display-6 fw-bold">
+    <i class="bi bi-clipboard2-pulse-fill text-info me-2"></i>COVID-19 Testing Statistics
+  </h1>
+  <hr class="border-light opacity-50" />
 
+  <!-- Table Section -->
+  <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+    <table class="table table-bordered table-hover table-dark text-center align-middle">
+      <thead class="table-secondary text-dark sticky-top">
+        <tr>
+          <th>#</th>
+          <th>Timestamp</th>
+          <th>Total Samples Tested</th>
+          <th>Total Individuals Tested</th>
+          <th>Total Positive Cases</th>
+          <th>Source</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cs of testdata; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ cs.timestamp | date: 'medium' }}</td>
+          <td>{{ cs.totalSamplesTested | number }}</td>
+          <td>{{ cs.totalIndividualsTested | number }}</td>
+          <td>{{ cs.totalPositiveCases | number }}</td>
+          <td>
+            <a [href]="cs.source" target="_blank" rel="noopener" class="text-warning text-decoration-underline">
+              View Source
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

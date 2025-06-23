@@ -7,17 +7,18 @@ import { DataServiceService } from 'src/app/services/data-service.service';
   styleUrls: ['./medical-colleges.component.css']
 })
 export class MedicalCollegesComponent implements OnInit {
-college:any
-Searchbox;
-  constructor(private dataservice: DataServiceService) { }
-  searchclear(){
-    this.Searchbox='';
+  college: any[] = [];
+  Searchbox: string = '';
 
-  }
+  constructor(private dataservice: DataServiceService) {}
+
   ngOnInit(): void {
-    this.dataservice.getMedicalCollegeData().subscribe(data=>{
-      this.college = data.data.medicalColleges;
-    })
+    this.dataservice.getMedicalCollegeData().subscribe(data => {
+      this.college = data?.data?.medicalColleges || [];
+    });
   }
 
+  searchclear(): void {
+    this.Searchbox = '';
+  }
 }

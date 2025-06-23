@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -11,7 +10,7 @@ import { DashboardCardComponent } from './components/dashboard-card/dashboard-ca
 import { Ng2GoogleChartsModule } from "ng2-google-charts";
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
-import {MatSortModule} from '@angular/material/sort';
+import { MatSortModule } from '@angular/material/sort';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IndiaComponent } from './components/india/india.component';
 import { ContactComponent } from './components/contact/contact.component';
@@ -20,7 +19,7 @@ import { HospitalBedsComponent } from './components/hospital-beds/hospital-beds.
 import { TestingStatsComponent } from './components/testing-stats/testing-stats.component';
 import { RawpatientdataComponent } from './components/rawpatientdata/rawpatientdata.component';
 import { PopupsComponent } from './components/popups/popups.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { FooterComponent } from './components/footer/footer.component';
 import { SymptomsComponent } from './components/symptoms/symptoms.component';
 import { EpassComponent } from './components/epass/epass.component';
@@ -46,7 +45,7 @@ import { EpassComponent } from './components/epass/epass.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,HttpClientModule,
+    AppRoutingModule, HttpClientModule,
     Ng2GoogleChartsModule,
     Ng2SearchPipeModule,
     FormsModule,
@@ -54,7 +53,7 @@ import { EpassComponent } from './components/epass/epass.component';
     BrowserAnimationsModule,
     MatDialogModule
   ],
-  entryComponents:[PopupsComponent],
+  entryComponents: [PopupsComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

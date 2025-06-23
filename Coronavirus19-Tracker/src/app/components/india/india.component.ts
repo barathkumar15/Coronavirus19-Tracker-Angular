@@ -1,38 +1,49 @@
 import { Component, OnInit } from '@angular/core';
 import { DataServiceService } from 'src/app/services/data-service.service';
-import {Sort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-india',
   templateUrl: './india.component.html',
-  styleUrls: ['./india.component.css']
+  styleUrls: ['./india.component.css'],
 })
 export class IndiaComponent implements OnInit {
-  Searchbox;
-  GlobalData:any
-  Statewise:any
-  totalConfirmed:number
-  totalRecovered:number
-  totalDeaths: number
-  totalActive:number
-  upDate:string
-  SortedTableData: any;
-  constructor(private dataService: DataServiceService) { }
-  searchclear(){
-    this.Searchbox='';
-  }
-  ngOnInit(): void {
-    this.dataService.getCoronaIndiaData().subscribe(data=>{
-       this.GlobalData=data.data.total
-       this.totalConfirmed=this.GlobalData.confirmed.toLocaleString();
-       this.totalRecovered=this.GlobalData.recovered.toLocaleString();
-       this.totalDeaths=this.GlobalData.deaths.toLocaleString();
-       this.totalActive=this.GlobalData.active.toLocaleString();
-       this.upDate=data.lastOriginUpdate
-      this.Statewise=data.data.statewise
-    })
+  searchbox: string = '';
+  GlobalData: any;
+  Statewise: any[] = [];
 
+  totalConfirmed: number = 0;
+  totalRecovered: number = 0;
+  totalDeaths: number = 0;
+  totalActive: number = 0;
+  upDate: string = '';
+
+  constructor(private dataService: DataServiceService) {}
+
+  ngOnInit(): void {
+    this.dataService.getCoronaIndiaData().subscribe((data) => {
+      const total = data.data.total;
+      this.GlobalData = total;
+
+      this.totalConfirmed = total.confirmed;
+      this.totalRecovered = total.recovered;
+      this.totalDeaths = total.deaths;
+      this.totalActive = total.active;
+      this.upDate = data.lastOriginUpdate;
+
+      this.Statewise = data.data.statewise;
+    });
+  }
+
+  searchClear(): void {
+    this.searchbox = '';
+  }
+
+  filteredStatewise() {
+    if (!this.searchbox) return this.Statewise;
+
+    const term = this.searchbox.toLowerCase();
+    return this.Statewise.filter((state) =>
+      state.state.toLowerCase().includes(term)
+    );
   }
 }
-
-

@@ -1,93 +1,48 @@
-//light theme
-$bg-theme-light:#fff;
-$color-theme-light:#222;
+.theme-toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 28px;
 
-// dark theme
-$bg-theme-dark:#0f0f0f;
-$color-theme-dark:#fff;
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
 
-.content-box{
-margin:20px auto 0 auto;
-background-color: #eee;
-color: $color-theme-light;
-border: 8px;
-padding: 30px 30px 40px 30px;
-max-width:1400px;
-
-
-}
-
-.theme-switcher-wrap{
-    width: 100%;
-    text-align: center;
-    margin-top: -20px;
-.theme-switcher{
-    display: inline-block;
+  .slider {
+    position: absolute;
     cursor: pointer;
-    .switch-path{
-        width: 40px;
-        height:20px;
-        border-radius: 10px;
-        background-color: #ccc;
-        .switch-handle{
-            background-color: #999;
-            width:20px;
-            height:20px;
-            border-radius: 50%;
-            transition: all 0.3s ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 30px;
 
-        }
+    &::before {
+      position: absolute;
+      content: "";
+      height: 22px;
+      width: 22px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
     }
-    .theme-switcher{
-        display:none;
-    }
-    &.active{
-        .switch-path{
-            background-color: #555;
-        }
-        .switch-handle{
-            transform: translateX(20px);
-            background-color: #7bbb5e;
-        }
-}
-}
-}
+  }
 
+  input:checked + .slider {
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+  }
 
-.content.theme-dark{
-   background-color: $bg-theme-dark;
-    color: $color-theme-dark;
-    .content-box{
-        background-color: #0f0f0f;
-        color:#eee;
-        h1,h3,h5
-        {color: #7bbb5e;
-        }
-        hr{
-            border:1px dashed red;
-            border-radius: 2px;
-        }
-        p{
-            color: #ccc;
+  input:checked + .slider::before {
+    transform: translateX(24px);
+  }
 
-        }
-
-    }
-    .links{
-         a{color:#fff;}
-    }
-    #bg{
-        .navbar-brand{ a{
-            color: #222;
-        }
-        }
-    }
-}
-.fa-moon-o:before {
-  content: "\f186";
-  margin: 10px;
-}
-.fa-sun-o:before {
-  content: "\f185";
-  margin: 10px;
+  .slider.round {
+    border-radius: 34px;
+  }
 }

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataServiceService } from 'src/app/services/data-service.service';
-import { GlobalDataSummary } from 'src/app/models/global-data';
-import { DataWiseData } from 'src/app/models/date-wise-data';
-
+import { CountrySummary } from 'src/app/models/global-data';
 
 @Component({
   selector: 'app-countries',
@@ -10,36 +8,28 @@ import { DataWiseData } from 'src/app/models/date-wise-data';
   styleUrls: ['./countries.component.css']
 })
 export class CountriesComponent implements OnInit {
+  countriesData: CountrySummary[] = [];
+  selectedCountryData: CountrySummary[] = [];
 
-  countries:any
-  country:any
-  totalConfirmed:number
-  totalRecovered:number
-  totalDeaths: number
-  totalActive:number
-  dateWiseData:any
-  selected: DataWiseData[];
-  countrywise: any;
-  constructor(private service: DataServiceService) { }
+  constructor(private service: DataServiceService) {}
 
   ngOnInit(): void {
-    this.service.getCountries().subscribe(data=>{
-      this.countries = data.Countries;
-    })
+    if (!this.service?.countriesData?.length) {
+      this.service.getCountriesList().subscribe((data) => {
+        this.service.countriesData = data || [];
+        this.countriesData = data || [];
+        this.selectedCountryData = [...this.countriesData]; // default full list
+      });
+    } else {
+      this.countriesData = this.service.countriesData;
+      this.selectedCountryData = [...this.countriesData];
+    }
   }
-  getCountry(country:any){
-    this.country =country
-    this.service.getCoronaRealtimeData(this.country).subscribe(data=>{
-      this.selected=data
-      var index=data.length-1
-      this.totalConfirmed=data[index].Confirmed.toLocaleString();
-      this.totalRecovered=data[index].Recovered.toLocaleString();
-      this.totalDeaths=data[index].Deaths.toLocaleString();
-      this.totalActive=data[index].Active.toLocaleString();
-      for(let i=0;i<index;i++){
 
-        this.selected[i]=data[index-i]
-      }
-    })
+  getCountry(iso3: string): void {
+    const selected = this.countriesData.filter(
+      (e) => e?.countryInfo?.iso3 === iso3
+    );
+    this.selectedCountryData = selected.length ? selected : [];
   }
 }

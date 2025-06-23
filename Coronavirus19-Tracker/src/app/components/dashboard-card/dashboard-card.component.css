@@ -1,8 +1,20 @@
+.gradient-confirmed {
+  background: linear-gradient(135deg, #ff9a00, #ff3c00);
+}
 
+.gradient-deaths {
+  background: linear-gradient(135deg, #6e1e1e, #d71f1f);
+}
+
+.gradient-recovered {
+  background: linear-gradient(135deg, #11998e, #38ef7d);
+}
+
+.gradient-active {
+  background: linear-gradient(135deg, #0575e6, #00f2fe);
+}
 
 .card:hover {
-  background-color: #ccc;
-}
-.card-text{
-  font-size: 2.8rem;
+  transform: scale(1.03);
+  transition: transform 0.3s ease-in-out;
 }

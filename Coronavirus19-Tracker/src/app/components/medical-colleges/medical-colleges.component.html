@@ -1,35 +1,55 @@
+<div class="bg-black text-white text-center py-4">
+  <h1 class="display-4">
+    <i class="heartbeat icon"></i>CoronaVirus-19 
+    <i class="chart bar icon"></i>Tracker 
+    <i class="fa fa-location-arrow" aria-hidden="true"></i> India
+  </h1>
+  <h3 class="display-4">
+    <i class="graduation cap icon"></i>Medical Colleges
+  </h3>
 
-<div class="bg-black text-center" >
- <h1 class="display-4"><i class="heartbeat icon"></i>CoronaVirus-19 <i class="chart bar icon"></i>Tracker <i class="fa fa-location-arrow" aria-hidden="true"></i> India</h1>
-  <h3 class="display-4"><i class="graduation cap icon"></i>Medical Colleges</h3>
-
-  <div class="col-md-4">
-    <div class="input-group mb-3">
+  <!-- Search Box -->
+  <div class="col-md-4 mx-auto my-3">
+    <div class="input-group">
       <div class="input-group-prepend">
-        <div class="input-group-text"><i class="fa fa-search fa-lg"></i></div>
-  <input class=form-control  Type="text"  name="search"[(ngModel)]="Searchbox" autocomplete="off"placeholder="State/City/Hospital">
-  <a class="btn btn-outline-secondary" (click)="searchclear()" *ngIf=Searchbox ><i class="fa fa-close"></i></a>
-  <br>
-  <hr>
-      </div></div>
-</div>
-<hr>
-<div class="row">
-  <div class="col-sm-6 col-md-4 col-lg-3" *ngFor= "let cs of college |filter: Searchbox ; let i=index;">
-    <div class="card text-white bg-dark mb-3" style="max-width: 30rem;">
-      <div class="card-body">
-        <div class="card-header" style="text-transform: uppercase; background-color: black;">{{cs.name}}</div>
-        <hr>
-        <p style="text-transform: uppercase;">
-        STATE: {{cs.state}}
-        <br>
-        CITY: {{cs.city}}<br>
-        OWNERSHIP:  {{cs.ownership}}
-        </p>
-       <h3 >ADMISSIONCAPACITY: <b>{{cs.admissionCapacity}}</b></h3>
-       <h3 >HOSPITALBEDS: <b>{{cs.hospitalBeds}}</b></h3>
+        <span class="input-group-text bg-secondary text-white"><i class="fa fa-search fa-lg"></i></span>
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="Searchbox"
+        autocomplete="off"
+        placeholder="Search by State / City / Hospital"
+      />
+      <div class="input-group-append" *ngIf="Searchbox">
+        <button class="btn btn-outline-light" (click)="searchclear()">
+          <i class="fa fa-close"></i>
+        </button>
       </div>
     </div>
   </div>
-</div>
+
+  <hr class="border-light my-4" />
+
+  <!-- Scrollable Card Grid -->
+  <div class="container-fluid px-4" style="max-height: 550px; overflow-y: auto;">
+    <div class="row">
+      <div class="col-sm-6 col-md-4 col-lg-3 mb-4" *ngFor="let cs of college | filter: Searchbox; let i = index">
+        <div class="card bg-dark text-white h-100 shadow-sm">
+          <div class="card-header bg-black text-uppercase fw-bold fs-6">
+            {{ cs.name }}
+          </div>
+          <div class="card-body">
+            <p class="text-uppercase mb-2">
+              <strong>State:</strong> {{ cs.state }}<br />
+              <strong>City:</strong> {{ cs.city }}<br />
+              <strong>Ownership:</strong> {{ cs.ownership }}
+            </p>
+            <h5 class="mb-2">Admission Capacity: <b>{{ cs.admissionCapacity }}</b></h5>
+            <h5>Hospital Beds: <b>{{ cs.hospitalBeds }}</b></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

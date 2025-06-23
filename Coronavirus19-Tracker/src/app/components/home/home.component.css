@@ -1,11 +1,27 @@
-th {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  background-color: black;
+.table thead th {
+  vertical-align: middle;
+  font-weight: bold;
+  font-size: 1rem;
 }
 
-#tabheight{
-  height: 525px;
+.table td {
+  font-size: 0.95rem;
+}
+
+@media (max-width: 576px) {
+  h1.display-5 {
+    font-size: 1.75rem;
+  }
+  .table td, .table th {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+}
+
+th {
+  cursor: pointer;
+}
+thead.sticky-top {
+  top: 0;
+  z-index: 2;
 }

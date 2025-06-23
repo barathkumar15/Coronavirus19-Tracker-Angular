@@ -1,0 +1,29 @@
+.form-switch {
+    width: 50px;
+    height: 26px;
+    background: #ccc;
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .form-switch.active {
+    background: linear-gradient(45deg, #4b6cb7, #182848);
+  }
+  
+  .form-switch .slider {
+    position: absolute;
+    height: 22px;
+    width: 22px;
+    top: 2px;
+    left: 2px;
+    background: #fff;
+    border-radius: 50%;
+    transition: left 0.3s ease;
+  }
+  
+  .form-switch.active .slider {
+    left: 26px;
+  }
+  

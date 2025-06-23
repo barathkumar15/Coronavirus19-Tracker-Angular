@@ -1,23 +1,50 @@
-
-<div class="content {{storedTheme}}" role="main">
+<div class="content" [ngClass]="storedTheme" role="main">
+  <!-- Navbar -->
   <app-navbar></app-navbar>
-  <div class="content-box">
 
-    <div class="theme-switcher-wrap">
-        <i class="fa fa-moon-o fa-2x" style="padding-right:15px;" *ngIf="storedTheme=='theme-light'"><h6>Dark theme</h6></i>
-        <i class="fa fa-sun-o fa-2x" style="padding-right:15px;" *ngIf="storedTheme=='theme-dark'"><h6>Light theme</h6></i>
-          <label
-        [ngClass]="(storedTheme === 'theme-dark')?'theme-switcher active' :'theme-switcher'" (click)="setTheme()" >
-            <div class="switch-path">
-                <div class="switch-handle">
-                </div>
-            </div>
+  <!-- Content Box -->
+  <div class="container py-4">
+    <!-- Theme Switcher -->
+    <div class="d-flex justify-content-end align-items-center mb-4 flex-wrap gap-3">
+
+      <!-- Theme Label & Icon -->
+      <div class="d-flex align-items-center">
+        <i
+          *ngIf="storedTheme === 'theme-light'"
+          class="bi bi-moon-stars-fill text-dark fs-4 me-2"
+        ></i>
+        <i
+          *ngIf="storedTheme === 'theme-dark'"
+          class="bi bi-sun-fill text-warning fs-4 me-2"
+        ></i>
+        <span class="fw-semibold text-muted">
+          {{ storedTheme === 'theme-light' ? 'Dark Theme' : 'Light Theme' }}
+        </span>
+      </div>
+
+      <!-- Theme Toggle -->
+      <div>
+        <label class="theme-toggle-switch">
+          <input
+            type="checkbox"
+            (change)="setTheme()"
+            [checked]="storedTheme === 'theme-dark'"
+            aria-label="Toggle theme"
+          />
+          <span class="slider round"></span>
         </label>
+      </div>
     </div>
 
-<router-outlet></router-outlet>
-<br><br>
-<app-symptoms></app-symptoms>
+    <!-- Main View -->
+    <router-outlet></router-outlet>
+
+    <!-- Symptoms Section -->
+    <div class="mt-5">
+      <app-symptoms></app-symptoms>
+    </div>
   </div>
+
+  <!-- Footer -->
+  <app-footer></app-footer>
 </div>
-<app-footer></app-footer>

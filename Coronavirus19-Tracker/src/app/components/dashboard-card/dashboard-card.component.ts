@@ -15,7 +15,9 @@ totalRecovered;
 totalDeaths;
 @Input('totalActive')
 totalActive;
-
+todayConfirmed = 0;
+todayRecovered = 0;
+todayDeaths = 0;
   constructor() { }
 
   ngOnInit(): void {

@@ -1,16 +1,19 @@
-#bg{
-  background-color: rgb(15, 9, 9);
-
+.text-gradient {
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-hr{
-  border:1px dashed red;
-  border-radius: 2px;
-  opacity: .5;
-}
 .avatar {
-  vertical-align: middle;
-  width: 70px;
-  height: 70px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+}
+
+hr {
+  border: 1px dashed #dc3545;
+  border-radius: 2px;
+  opacity: 0.5;
 }

@@ -11,15 +11,15 @@ import { RawpatientdataComponent } from './components/rawpatientdata/rawpatientd
 import { EpassComponent } from './components/epass/epass.component';
 
 const routes: Routes = [
-  {path : '' , component : HomeComponent},
-  {path : 'countries', component: CountriesComponent},
-  {path : 'india', component: IndiaComponent},
-  {path : 'contact', component: ContactComponent},
-  {path : 'medical-colleges', component: MedicalCollegesComponent},
-  {path : 'Hosptial-Beds', component: HospitalBedsComponent},
-  {path : 'Testing-stats', component: TestingStatsComponent},
-  {path : 'Rawpatientdata', component: RawpatientdataComponent},
-  {path : 'epass', component: EpassComponent}
+  { path: '', component: HomeComponent },
+  { path: 'countries', component: CountriesComponent },
+  { path: 'india', component: IndiaComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'medical-colleges', component: MedicalCollegesComponent },
+  { path: 'Hosptial-Beds', component: HospitalBedsComponent },
+  { path: 'Testing-stats', component: TestingStatsComponent },
+  { path: 'Rawpatientdata', component: RawpatientdataComponent },
+  { path: 'epass', component: EpassComponent }
 
 ];
 

@@ -7,22 +7,20 @@ import { DataServiceService } from 'src/app/services/data-service.service';
   styleUrls: ['./hospital-beds.component.css']
 })
 export class HospitalBedsComponent implements OnInit {
+  hospital: any[] = [];
+  summary: any = {};
+  Searchbox: string = '';
 
-  constructor(private dataservice: DataServiceService) { }
-  hospital:any;
-  summary:any;
+  constructor(private dataservice: DataServiceService) {}
 
-Searchbox;
-  searchclear(){
-    this.Searchbox='';
-
-  }
   ngOnInit(): void {
-    this.dataservice.getHospitalData().subscribe(data=>{
-      this.hospital = data.data.regional;
-      this.summary = data.data.summary;
-    })
-
+    this.dataservice.getHospitalData().subscribe(data => {
+      this.hospital = data?.data?.regional || [];
+      this.summary = data?.data?.summary || {};
+    });
   }
 
+  searchclear(): void {
+    this.Searchbox = '';
+  }
 }

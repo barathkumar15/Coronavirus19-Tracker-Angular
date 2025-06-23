@@ -1,110 +1,104 @@
-<div class="bg-black text-center" >
-   <h1 class="display-4"><i class="heartbeat icon"></i>CoronaVirus-19 <i class="chart bar icon"></i>Tracker <i class="fa fa-location-arrow" aria-hidden="true"></i> India</h1>
-  <h3 class="display-4"><i class="hospital icon"></i>Hospitals and <i class="bed icon"></i>Beds</h3>
-  <hr>
-  <div class="ui statistics">
+<div class="bg-black text-white py-4 text-center">
+  <h1 class="display-4">
+    <i class="heartbeat icon"></i>CoronaVirus-19 
+    <i class="chart bar icon"></i>Tracker 
+    <i class="fa fa-location-arrow" aria-hidden="true"></i> India
+  </h1>
+  <h3 class="display-4">
+    <i class="hospital icon"></i>Hospitals and 
+    <i class="bed icon"></i>Beds
+  </h3>
+  <hr class="border-secondary">
+
+  <!-- Statistics -->
+  <div class="ui statistics d-flex justify-content-center flex-wrap gap-4 mb-4">
     <div class="red statistic">
-      <div class="value">
-        {{summary.ruralBeds.toLocaleString()}}
-      </div>
-      <div class="label" style="background-color:rgba(247, 10, 10, 0.808);">
-        RURAL BEDS
-      </div>
+      <div class="value">{{ summary?.ruralBeds | number }}</div>
+      <div class="label bg-danger text-white">RURAL BEDS</div>
     </div>
     <div class="orange statistic">
-      <div class="value">
-        {{summary.ruralHospitals.toLocaleString()}}
-      </div>
-      <div class="label" style="background-color:orange;">
-        RURAL HOSPITALS
-      </div>
+      <div class="value">{{ summary?.ruralHospitals | number }}</div>
+      <div class="label bg-warning text-dark">RURAL HOSPITALS</div>
     </div>
     <div class="yellow statistic">
-      <div class="value">
-        {{summary.totalBeds.toLocaleString()}}
-      </div>
-      <div class="label" style="background-color:yellow;">
-        TOTAL BEDS
-      </div>
+      <div class="value">{{ summary?.totalBeds | number }}</div>
+      <div class="label bg-warning text-dark">TOTAL BEDS</div>
     </div>
     <div class="olive statistic">
-      <div class="value">
-        {{summary.totalHospitals.toLocaleString()}}
-      </div>
-      <div class="label" style="background-color:olive;">
-        TOTAL HOSPITALS
-      </div>
+      <div class="value">{{ summary?.totalHospitals | number }}</div>
+      <div class="label bg-success text-white">TOTAL HOSPITALS</div>
     </div>
     <div class="green statistic">
-      <div class="value">
-        {{summary.urbanBeds.toLocaleString()}}
-      </div>
-      <div class="label" style="background-color:green;">
-        URBAN BEDS
-      </div>
+      <div class="value">{{ summary?.urbanBeds | number }}</div>
+      <div class="label bg-success text-white">URBAN BEDS</div>
     </div>
     <div class="teal statistic">
-      <div class="value">
-        {{summary.urbanHospitals.toLocaleString()}}
+      <div class="value">{{ summary?.urbanHospitals | number }}</div>
+      <div class="label bg-info text-white">URBAN HOSPITALS</div>
+    </div>
+  </div>
+
+  <!-- Search Box -->
+  <div class="col-md-4 mx-auto mb-4">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text bg-secondary text-white"><i class="fa fa-search fa-lg"></i></span>
       </div>
-      <div class="label" style="background-color:teal;">
-        URBAN HOSPITALS
+      <input
+        class="form-control"
+        type="text"
+        [(ngModel)]="Searchbox"
+        autocomplete="off"
+        placeholder="Search by state"
+      />
+      <div class="input-group-append" *ngIf="Searchbox">
+        <button class="btn btn-outline-light" (click)="searchclear()">
+          <i class="fa fa-close"></i>
+        </button>
       </div>
     </div>
   </div>
 
-  <hr>
-  <div class="col-md-4">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <div class="input-group-text"><i class="fa fa-search fa-lg"></i></div>
-  <input class=form-control  Type="text"  name="search"[(ngModel)]="Searchbox" autocomplete="off"placeholder="Search state">
-  <a class="btn btn-outline-secondary" (click)="searchclear()" *ngIf=Searchbox ><i class="fa fa-close"></i></a>
-  <br>
-  <hr>
-      </div></div>
+  <!-- Table -->
+  <div class="table-responsive px-3" style="max-height: 500px; overflow-y: auto;">
+    <table class="table table-bordered table-striped table-dark text-center align-middle">
+      <thead class="table-light text-dark sticky-top">
+        <tr>
+          <th>#</th>
+          <th>State</th>
+          <th>Rural Beds</th>
+          <th>Rural Hospitals</th>
+          <th>Total Beds</th>
+          <th>Total Hospitals</th>
+          <th>Urban Beds</th>
+          <th>Urban Hospitals</th>
+          <th>As On</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cs of hospital | filter: Searchbox; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ cs.state }}</td>
+          <td>{{ cs.ruralBeds | number }}</td>
+          <td>{{ cs.ruralHospitals | number }}</td>
+          <td>{{ cs.totalBeds | number }}</td>
+          <td>{{ cs.totalHospitals | number }}</td>
+          <td>{{ cs.urbanBeds | number }}</td>
+          <td>{{ cs.urbanHospitals | number }}</td>
+          <td>{{ cs.asOn | date: 'mediumDate' }}</td>
+        </tr>
+        <tr class="fw-bold bg-black">
+          <td></td>
+          <td>Total</td>
+          <td>{{ summary?.ruralBeds | number }}</td>
+          <td>{{ summary?.ruralHospitals | number }}</td>
+          <td>{{ summary?.totalBeds | number }}</td>
+          <td>{{ summary?.totalHospitals | number }}</td>
+          <td>{{ summary?.urbanBeds | number }}</td>
+          <td>{{ summary?.urbanHospitals | number }}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-<hr>
-<div class="table-responsive" id="tabheight">
-  <table class="table table-bordered table-striped table-dark">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">state</th>
-        <th scope="col">RuralBeds</th>
-        <th scope="col">RuralHospitals</th>
-        <th scope="col">TotalBeds</th>
-        <th scope="col">TotalHospitals</th>
-        <th scope="col">UrbanBeds</th>
-        <th scope="col">UrbanHospitals</th>
-          <th scope="col">Ason Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor= "let cs of hospital |filter:Searchbox ; let i=index;">
-        <td>{{i+1}}</td>
-        <td>{{cs.state}}</td>
-        <td>{{cs.ruralBeds}}</td>
-        <td>{{cs.ruralHospitals}}</td>
-        <td>{{cs.totalBeds}}</td>
-        <td>{{cs.totalHospitals}}</td>
-        <td>{{cs.urbanBeds}}</td>
-        <td>{{cs.urbanHospitals}}</td>
-        <td>{{cs.asOn|date}}</td>
-      </tr>
-      <tr style=" background-color: black;">
-        <td></td>
-        <td>TOTAL CASES</td>
-        <td><b>{{summary.ruralBeds}}</b></td>
-        <td><b>{{summary.ruralHospitals}}</b></td>
-        <td><b>{{summary.totalBeds}}</b></td>
-        <td><b>{{summary.totalHospitals}}</b></td>
-        <td><b>{{summary.urbanBeds}}</b></td>
-        <td><b>{{summary.urbanHospitals}}</b></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-</div>
-
